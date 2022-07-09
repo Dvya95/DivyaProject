@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class StudentRepository {
     ArrayList<Student> getStudentData() {
@@ -12,5 +15,9 @@ public class StudentRepository {
         list.add(student3);
         list.add(student4);
         return list;
+    }
+    void prepareMapFromList(ArrayList<Student> studentArrayList){
+        Map<Integer, Student> studentMap = studentArrayList.stream().collect(Collectors.toMap(Student::getRolNo, Function.identity()));
+        studentMap.forEach((k, v) -> System.out.println((k + ":" + v.getName()+" "+v.getMarks()+" "+v.getRolNo())));
     }
 }
